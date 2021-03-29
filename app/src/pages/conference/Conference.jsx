@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
-import { Sessions, Session, AddSession } from "./Sessions";
+import { AddSession } from "./sessions/AddSession";
+import { Sessions } from "./sessions/Sessions";
+import { Session } from "./sessions/Session";
 import "./style-sessions.css";
 import { Speakers, Speaker } from "./Speakers";
 import ErrorBoundary from "./ErrorBoundary";
