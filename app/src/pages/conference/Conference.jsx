@@ -3,12 +3,15 @@ import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import { Sessions, Session, AddSession } from "./Sessions";
 import "./style-sessions.css";
 import { Speakers, Speaker } from "./Speakers";
+import ErrorBoundary from "./ErrorBoundary";
+import {AboutUs} from "./AboutUs";
+import {Navigation} from "./Navigation";
 
 export function Conference() {
   const { path, url } = useRouteMatch();
 
   return (
-    <>
+    <ErrorBoundary>
       <Switch>
         <Route path={`${path}/sessions/new`}>
           <AddSession />
@@ -25,6 +28,13 @@ export function Conference() {
         <Route path={`${path}/sessions`}>
           <Sessions />
         </Route>
+        <Route path={`${path}/about`}>
+          <AboutUs />
+        </Route>
+        <Route path={`${path}`}>
+          <Navigation />
+        </Route>
+
 
         <Route path={`${path}`}>
           <section className="banner">
@@ -44,7 +54,7 @@ export function Conference() {
           </section>
         </Route>
       </Switch>
-    </>
+    </ErrorBoundary>
   );
 }
 
