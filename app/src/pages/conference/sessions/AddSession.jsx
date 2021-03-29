@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SessionForm } from "../sessions/SessionForm";
+import { SessionForm } from "./SessionForm";
 
 export function AddSession() {
   return (
