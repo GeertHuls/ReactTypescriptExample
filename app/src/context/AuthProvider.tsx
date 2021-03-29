@@ -3,8 +3,20 @@ import React from "react";
 export const AuthContext = React.createContext();
 const Provider = AuthContext.Provider;
 
-export function AuthProvider({ children }) {
-  const [authInfo, setAuthInfo] = React.useState({
+interface Props {
+  children: React.ReactNode;
+}
+
+interface UserData {
+  role: "USER" | "ADMIN";
+}
+
+interface AuthInfo {
+  userData: UserData | null;
+}
+
+export function AuthProvider({ children }: Props) {
+  const [authInfo, setAuthInfo] = React.useState<AuthInfo>({
     userData: null,
   });
 
