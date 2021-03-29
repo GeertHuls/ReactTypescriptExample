@@ -1,6 +1,14 @@
 import React from "react";
 
-export const AuthContext = React.createContext();
+interface AuthContextValues {
+  authInfo: AuthInfo;
+  isAuthenticated: boolean;
+  setAuthInfo: (authInfo: AuthInfo) => void;
+  isAdmin: boolean;
+}
+
+export const AuthContext = React.createContext<undefined | AuthContextValues>(
+    undefined);
 const Provider = AuthContext.Provider;
 
 interface Props {
@@ -20,7 +28,7 @@ export function AuthProvider({ children }: Props) {
     userData: null,
   });
 
-  const isAuthenticated = authInfo.userData;
+  const isAuthenticated = authInfo.userData !== null;
 
   const isAdmin = authInfo.userData?.role === "ADMIN";
 
@@ -30,3 +38,15 @@ export function AuthProvider({ children }: Props) {
     </Provider>
   );
 }
+
+// Custom hook:
+export function useAuthContext() {
+  const context = React.useContext(AuthContext);
+
+  if (context === undefined) {
+    // handle
+    throw new Error("useAuthContext should be used within an AuthProvider.");
+  }
+  return context;
+}
+
